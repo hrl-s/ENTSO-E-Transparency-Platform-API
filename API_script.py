@@ -1,10 +1,11 @@
+# Original Source by Sondre Elstad
 import requests
 import pandas as pd
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 
 # ENTSO-E API token
-API_TOKEN = 'api_token_here'
+from config import API_TOKEN
 
 # Base URL for ENTSO-E API-et
 BASE_URL = 'https://web-api.tp.entsoe.eu/api'
@@ -61,7 +62,7 @@ end_date = datetime(2025, 1, 2)
 
 # Hent og prosesser data for de ulike EIC-sonene
 for zone_name, zone_code in bidding_zones.items():
-    print(fHenter daglige priser for {zone_name}...)
+    print(f"Henter daglige priser for {zone_name}...")
     xml_data = fetch_price_data(zone_code, start_date, end_date)
     if xml_data:
         df = parse_price_xml_to_dataframe(xml_data)
